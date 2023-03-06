@@ -3820,15 +3820,19 @@ if (isset($_POST['compute_leave_duration'])) {
     echo $days;
 }
 if (isset($_POST['select_leave_balances'])) {
-    $leaves = array('SL', 'VL', 'others');
+    $leaves = array('SL', 'VL', 'others', 'SLVL', 'ape', 'hp', 'bl');
     $leave_type = $_POST['leave_type'];
     foreach ($leaves as $k => $v) {
+
         if ($leave_type == $v) {
             $employee_number = $_POST['delegate'];
 
             $sql = mysqli_query($db, "SELECT * FROM tbl_leave_balances WHERE employee_number = '$employee_number'");
+            $row = mysqli_fetch_assoc($sql);
 
-            if ($row = mysqli_fetch_assoc($sql)) {
+            if ($leave_type == 'SLVL') {
+                echo $row['SL'] + $row['VL'];
+            } else if ($row) {
                 echo $row[$leave_type];
             }
         }
