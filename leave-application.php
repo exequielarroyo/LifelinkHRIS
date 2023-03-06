@@ -77,9 +77,18 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                 <option></option>
                                 <option value="VL">Vacation Leave</option>
                                 <option value="SL">Sick Leave</option>
+                                <option value="SLVL">Combination of SL/VL</option>
                                 <option value="others">Others</option>
-
                             </select>
+
+                            <div id="leave_type_others_wrapper" hidden>
+                                <select name="leave_type_others" id="leave_type_others" class="select-chosen" data-placeholder="Choose other Leave Type..." style="width: 250px;">
+                                    <option></option>
+                                    <option value="ape">APE</option>
+                                    <option value="hp">HP</option>
+                                    <option value="bl">BL</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -240,10 +249,29 @@ while ($row = mysqli_fetch_assoc($sql)) {
         }
 
     });
+    $('#leave_type_others').on('change', function() {
+        var leave_type = $(this).val();
+        var select_leave_balances = '';
+        var delegate = $('#delegate_name').val();
+        $.ajax({
+            url: "inc/config.php",
+            method: "POST",
+            data: {
+                select_leave_balances: select_leave_balances,
+                leave_type: leave_type,
+                delegate: delegate
+            },
+            success: function(data) {
+                $('#leave_balance').val(data);
+            }
+        });
+    });
     $('#leave_type').on('change', function() {
         var leave_type = $(this).val();
         var role_type = $('#roletype').val();
+        $('#leave_type_others_wrapper').hide();
         if (leave_type === "others") {
+            $('#leave_type_others_wrapper').show();
             // $('#startDate').removeAttr('min');
             <?php
             $DateToday = date('Y-m-d');
@@ -292,13 +320,28 @@ while ($row = mysqli_fetch_assoc($sql)) {
                 $('#endDate').removeAttr('min');
                 $('#endDate').removeAttr('max');
             }
+        } else if (leave_type === "SL/VL") {
+            if (role_type === "Admin") {
+                $('#startDate').removeAttr('max');
+                $('#startDate').removeAttr('min');
+                $('#endDate').removeAttr('max');
+                $('#endDate').removeAttr('min');
+
+            } else {
+                // $('#startDate').attr('min', '<?= $DateToday ?>');
+                $('#startDate').removeAttr('min');
+                $('#startDate').removeAttr('max');
+                // $('#endDate').attr('min', '<?= $DateToday ?>');
+                $('#endDate').removeAttr('min');
+                $('#endDate').removeAttr('max');
+            }
         } else {
             $('#startDate').removeAttr('max');
             $('#endDate').removeAttr('max');
         }
         var delegate = $('#delegate_name').val();
         var select_leave_balances = '';
-        var available_leaves = ['SL', 'VL', 'others']; // MNCS = maternity normal or cs -- MM = Maternity Miscarriage 
+        var available_leaves = ['SL', 'VL', 'SLVL', 'others']; // MNCS = maternity normal or cs -- MM = Maternity Miscarriage 
         if ($.inArray(leave_type, available_leaves) !== -1) {
             $('#btn_leave_application').prop("disabled", true);
             $('#btn_leave_application').text('Loading...');
