@@ -75,6 +75,26 @@ while ($row = mysqli_fetch_assoc($sql)) {
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label>APE</label>
+                                <input type="text" name="ape" id="ape" class="form-control" value="<?= $r['ape'] ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>HP</label>
+                                <input type="text" name="hp" id="hp" class="form-control" value="<?= $r['hp'] ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>BL</label>
+                                <input type="text" name="bl" id="bl" class="form-control" value="<?= $r['bl'] ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label>Maternity</label>
                                 <input type="text" name="maternity" id="maternity" class="form-control" value="<?= $r['maternity'] ?>">
                             </div>
@@ -129,10 +149,20 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                                         <option value="VL">Vacation Leave</option>
                                                         <option value="SL">Sick Leave</option>
                                                         <option value="EL">Others</option>
-                                                        <option value="maternity">Maternity</option>
+                                                        <!-- <option value="ape">APE</option>
+                                                        <option value="hp">HP</option>
+                                                        <option value="bl">BL</option> -->
                                                         <option value="paternity">Paternity</option>
                                                         <option value="solo_parent">Solo Parent</option>
                                                     </select>
+                                                    <div id="leave_type_others_wrapper" hidden>
+                                                        <select name="leave_type_others" id="leave_type_others" class="select-chosen" data-placeholder="Choose other Leave Type..." style="width: 250px;">
+                                                            <option></option>
+                                                            <option value="ape">APE</option>
+                                                            <option value="hp">HP</option>
+                                                            <option value="bl">BL</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -189,6 +219,8 @@ while ($row = mysqli_fetch_assoc($sql)) {
                         <th class="text-center">Duration</th>
                         <th class="text-center">Reason</th>
                         <th class="text-center">Status</th>
+                        <th class="text-center">Others-LT</th>
+                        <th class="text-center">Leave w/o Pay</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -393,7 +425,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
         var paternity = $('#paternity').val();
         var solo_parent = $('#solo_parent').val();
         var leave_type = $('#leave_type').val();
-
+        $('#leave_type_others_wrapper').hide();
         if (leave_type == 'SL') {
             document.getElementById("amt_val").value = sl;
 
@@ -402,7 +434,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
 
         } else if (leave_type == 'EL') {
             document.getElementById("amt_val").value = el;
-
+            $('#leave_type_others_wrapper').show();
         } else if (leave_type == 'maternity') {
             document.getElementById("amt_val").value = maternity;
 
@@ -416,6 +448,22 @@ while ($row = mysqli_fetch_assoc($sql)) {
 
 
     }
+    $('#leave_type_others').on('change', function() {
+        const ape = $('#ape').val();
+        const hp = $('#hp').val();
+        const bl = $('#bl').val();
+        switch ($(this).val()) {
+            case "ape":
+                document.getElementById("amt_val").value = ape;
+                break;
+            case "hp":
+                document.getElementById("amt_val").value = hp;
+                break;
+            case "bl":
+                document.getElementById("amt_val").value = bl;
+                break;
+        }
+    });
 
     $('#amount_forfeit').focusin(function() {
         var sl = $('#sl').val();
