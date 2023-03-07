@@ -381,7 +381,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
         var leave_type = $('#leave_type').val();
         var delegate = $('#delegate_name').val();
         var select_leave_balances = '';
-        var available_leaves = ['SL', 'VL', 'others']; // MNCS = maternity normal or cs -- MM = Maternity Miscarriage 
+        var available_leaves = ['SL', 'VL', 'SLVL', 'others']; // MNCS = maternity normal or cs -- MM = Maternity Miscarriage 
         if ($.inArray(leave_type, available_leaves) !== -1) {
             $('#btn_leave_application').prop("disabled", true);
             $('#btn_leave_application').text('Loading...');
