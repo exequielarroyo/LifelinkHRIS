@@ -4449,20 +4449,15 @@ if (isset($_POST['btn_update_leave_balances'])) {
     $employee_number = $_POST['employee_number'];
     $sl = $_POST['sl'];
     $vl = $_POST['vl'];
-    $el = $_POST['el'];
+    $others = $_POST['others'];
+    $ape = $_POST['ape'];
+    $hp = $_POST['hp'];
+    $bl = $_POST['bl'];
     $maternity = $_POST['maternity'];
     $paternity = $_POST['paternity'];
     $solo_parent = $_POST['solo_parent'];
 
-    $sql = mysqli_query($db, "UPDATE tbl_leave_balances SET
-    SL = '$sl',
-    VL = '$vl',
-    EL = '$el',
-    maternity = '$maternity',
-    solo_parent = '$solo_parent',
-    paternity = '$paternity'
-    WHERE employee_number = '$employee_number'
-    ");
+    $sql = mysqli_query($db, "UPDATE tbl_leave_balances SET SL = '$sl', VL = '$vl', others = '$others', ape = '$ape', hp = '$hp', bl = '$bl', maternity = '$maternity', solo_parent = '$solo_parent', paternity = '$paternity' WHERE employee_number = '$employee_number'");
     if ($sql) {
         $res = '<div class="alert alert-success alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
