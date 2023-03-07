@@ -57,7 +57,6 @@ if ($daynow == '2') {
                         <th class="text-center">SL</th>
                         <th class="text-center">VL</th>
                         <th class="text-center">Combination of SL/VL</th>
-                        <th class="text-center">Others</th>
                         <th class="text-center">APE</th>
                         <th class="text-center">HP</th>
                         <th class="text-center">BL</th>
@@ -91,7 +90,6 @@ if ($daynow == '2') {
                             <td class="text-center"><?= $row['SL'] ?></td>
                             <td class="text-center"><?= $row['VL'] ?></td>
                             <td class="text-center"><?= $row['SL'] + $row['VL'] ?></td>
-                            <td class="text-center"><?= $row['others'] ?></td>
                             <td class="text-center"><?= $row['ape'] ?></td>
                             <td class="text-center"><?= $row['hp'] ?></td>
                             <td class="text-center"><?= $row['bl'] ?></td>

@@ -53,22 +53,16 @@ while ($row = mysqli_fetch_assoc($sql)) {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>SL</label>
                                 <input type="text" name="sl" id="sl" class="form-control" value="<?= $r['SL'] ?>">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>VL</label>
                                 <input type="text" name="vl" id="vl" class="form-control" value="<?= $r['VL'] ?>">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Others</label>
-                                <input type="text" name="others" id="others" class="form-control" value="<?= $r['others'] ?>">
                             </div>
                         </div>
                     </div>
