@@ -3898,6 +3898,7 @@ if (isset($_POST['forfeit_leave'])) {
     $employee_number = $_POST['employee_number'];
     $employee_name = $_POST['employee_name'];
     $leave_type = $_POST['leave_type'];
+    $leave_type_others = $_POST['leave_type_others'];
     $amount_forfeit = $_POST['amount_forfeit'];
     $amt_val = $_POST['amt_val'];
     $userid = $_SESSION['hris_id'];
@@ -3909,9 +3910,18 @@ if (isset($_POST['forfeit_leave'])) {
     } else if ($leave_type == 'VL') {
         mysqli_query($db, "UPDATE tbl_leave_balances SET VL = '$total_forfeit_leave' WHERE employee_number = '$employee_number'");
         mysqli_query($db, "INSERT INTO tbl_forfeit VALUES('','$employee_number','$employee_name','$leave_type','$amount_forfeit','$userid','$datetime')");
-    } else if ($leave_type == 'EL') {
-        mysqli_query($db, "UPDATE tbl_leave_balances SET EL = '$total_forfeit_leave' WHERE employee_number = '$employee_number'");
-        mysqli_query($db, "INSERT INTO tbl_forfeit VALUES('','$employee_number','$employee_name','$leave_type','$amount_forfeit','$userid','$datetime')");
+    } else if ($leave_type == 'others') {
+        if ($leave_type_others == 'ape') {
+            echo $leave_type_others;
+            mysqli_query($db, "UPDATE tbl_leave_balances SET ape = '$total_forfeit_leave' WHERE employee_number = '$employee_number'");
+            mysqli_query($db, "INSERT INTO tbl_forfeit VALUES('','$employee_number','$employee_name','$leave_type','$amount_forfeit','$userid','$datetime')");
+        } else if ($leave_type_others == 'hp') {
+            mysqli_query($db, "UPDATE tbl_leave_balances SET hp = '$total_forfeit_leave' WHERE employee_number = '$employee_number'");
+            mysqli_query($db, "INSERT INTO tbl_forfeit VALUES('','$employee_number','$employee_name','$leave_type','$amount_forfeit','$userid','$datetime')");
+        } else if ($leave_type_others == 'bl') {
+            mysqli_query($db, "UPDATE tbl_leave_balances SET bl = '$total_forfeit_leave' WHERE employee_number = '$employee_number'");
+            mysqli_query($db, "INSERT INTO tbl_forfeit VALUES('','$employee_number','$employee_name','$leave_type','$amount_forfeit','$userid','$datetime')");
+        }
     } else if ($leave_type == 'maternity') {
         mysqli_query($db, "UPDATE tbl_leave_balances SET maternity = '$total_forfeit_leave' WHERE employee_number = '$employee_number'");
         mysqli_query($db, "INSERT INTO tbl_forfeit VALUES('','$employee_number','$employee_name','$leave_type','$amount_forfeit','$userid','$datetime')");

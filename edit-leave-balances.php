@@ -148,7 +148,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                                         <option></option>
                                                         <option value="VL">Vacation Leave</option>
                                                         <option value="SL">Sick Leave</option>
-                                                        <option value="EL">Others</option>
+                                                        <option value="others">Others</option>
                                                         <!-- <option value="ape">APE</option>
                                                         <option value="hp">HP</option>
                                                         <option value="bl">BL</option> -->
@@ -439,7 +439,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
     function getAmountofLeave() {
         var sl = $('#sl').val();
         var vl = $('#vl').val();
-        var el = $('#el').val();
+        var others = $('#others').val();
         var maternity = $('#maternity').val();
         var paternity = $('#paternity').val();
         var solo_parent = $('#solo_parent').val();
@@ -451,8 +451,8 @@ while ($row = mysqli_fetch_assoc($sql)) {
         } else if (leave_type == 'VL') {
             document.getElementById("amt_val").value = vl;
 
-        } else if (leave_type == 'EL') {
-            document.getElementById("amt_val").value = el;
+        } else if (leave_type == 'others') {
+            document.getElementById("amt_val").value = others;
             $('#leave_type_others_wrapper').show();
         } else if (leave_type == 'maternity') {
             document.getElementById("amt_val").value = maternity;
