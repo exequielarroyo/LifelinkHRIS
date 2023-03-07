@@ -68,7 +68,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Others</label>
-                                <input type="text" name="el" id="el" class="form-control" value="<?= $r['others'] ?>">
+                                <input type="text" name="others" id="others" class="form-control" value="<?= $r['others'] ?>">
                             </div>
                         </div>
                     </div>
@@ -385,12 +385,21 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                         <select name="leave_types" id="leave_types" required class="select-chosen" data-placeholder="Choose a Leave Type..." style="width: 250px;" onchange="getAmountofLeaves()">
                                             <option value="null"></option>
                                             <option value="VL">Vacation Leave</option>
+                                            <option value="EL">Others</option>
                                             <!-- <option value="SL">Sick Leave</option>
                                                         <option value="EL">Others</option>
                                                         <option value="maternity">Maternity</option>
                                                         <option value="paternity">Paternity</option>
                                                         <option value="solo_parent">Solo Parent</option> -->
                                         </select>
+                                        <div id="leave_type_others_wrapper" hidden>
+                                                <select name="leave_type_others" id="leave_type_others" class="select-chosen" data-placeholder="Choose other Leave Type..." style="width: 250px;">
+                                                    <option></option>
+                                                    <option value="ape">APE</option>
+                                                    <option value="hp">HP</option>
+                                                    <option value="bl">BL</option>
+                                                </select>
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
