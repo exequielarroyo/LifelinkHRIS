@@ -219,7 +219,6 @@ while ($row = mysqli_fetch_assoc($sql)) {
                         <th class="text-center">Duration</th>
                         <th class="text-center">Reason</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center">Others-LT</th>
                         <th class="text-center">Leave w/o Pay</th>
                     </tr>
                 </thead>
@@ -242,8 +241,7 @@ while ($row = mysqli_fetch_assoc($sql)) {
                             <td><?= $row['duration'] ?></td>
                             <td><?= $row['reason'] ?></td>
                             <td><?= $row['status'] ?></td>
-                            <td>0</td>
-                            <td>0</td>
+                            <td><?= $row['leave_wo_pay_days'] ?></td>
 
 
                         </tr>
@@ -273,8 +271,6 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                 <th class="text-center">Leave Type</th>
                                 <th class="text-center">Amount Forfeited</th>
                                 <th class="text-center">Date Created</th>
-                                <th class="text-center">Others-LT</th>
-                                <th class="text-center">Leave w/o Pay</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -288,8 +284,6 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                     <td><?= $row['leave_type'] ?></td>
                                     <td><?= $row['amount'] ?></td>
                                     <td><?= $row['created_date'] ?></td>
-                                    <td>0</td>
-                                    <td>0</td>
 
 
                                 </tr>
@@ -319,8 +313,6 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                 <th class="text-center">Leave Type</th>
                                 <th class="text-center">Amount Commuted</th>
                                 <th class="text-center">Date Created</th>
-                                <th class="text-center">Others-LT</th>
-                                <th class="text-center">Leave w/o Pay</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -334,8 +326,6 @@ while ($row = mysqli_fetch_assoc($sql)) {
                                     <td><?= $row['leave_type'] ?></td>
                                     <td><?= $row['amount'] ?></td>
                                     <td><?= $row['created_date'] ?></td>
-                                    <td>0</td>
-                                    <td>0</td>
 
 
                                 </tr>
